@@ -1,19 +1,13 @@
-# Fill this in before you submit -- our evaluator runs these commands
-# EXACTLY as written, in this order, from a fresh checkout of your fork.
-# Keep every command non-interactive (no prompts) and idempotent.
-
+# Evaluator executes these commands in order from a fresh checkout.
 setup_commands:
   - "pip install -r requirements.txt"
-  # - add every other setup step here, in order (env vars, downloads, etc.)
 
 run_commands:
   - "python src/main.py --help"
-  # - the real command(s) that actually run your solution
+  - "python src/main.py intent --query \"When does the player score a goal?\" --video-type sports"
+  - "python src/main.py chunks --duration 95 --chunk-seconds 30 --overlap-seconds 5"
 
-test_commands: []
-  # optional -- commands that run your own tests/checks, if you have any
+test_commands:
+  - "pytest -q"
 
-notes: ""
-  # anything we should know before running this (e.g. "needs a GPU",
-  # "takes about 10 minutes", "expects a sample dataset already present
-  # under data/, see docs/ for where to get it")
+notes: "CPU-only baseline. Video classifier training requires a labeled path,label CSV. The VideoMME 10% benchmark data is not bundled; see docs/README.md before reporting benchmark metrics."
